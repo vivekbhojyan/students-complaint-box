@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Track Complaint | ABES Engineering College</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Existing CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
+    <span class="close-btn" onclick="toggleMenu()" style="color: #7d7d7d7d;" >&#9776;</span>
+    <a href="index.html">Home</a>
+    
+    
+    <a href="contact.html">Contact-us</a>
+    <a href="about.html">About-us</a>
+    <a href="login.html">Logout</a>
+</div>
+
+<!-- HEADER -->
+<header class="top-header">
+    <img src="download-removebg-preview.png" alt="ABES Logo">
+    <h1 style="color: rgb(99, 4, 4);"><b>ABES ENGINEERING COLLEGE</b></h1>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Track Your Complaint</h1>
+        <p>Check the status of your submitted complaint</p>
+    </div>
+</section>
+
+<!-- TRACK FORM -->
+<main class="mainform">
+    <h2 style="color: rgb(127,1,1); font-weight:bold;">Track Complaint</h2>
+    <p>Enter your details to view the complaint status.</p>
+    <hr>
+
+    <form>
+
+        <label>Complaint ID</label>
+        <input type="text" class="form-control"
+               placeholder="Enter your Complaint ID">
+
+        <label>Admission Number</label>
+        <input type="text" class="form-control"
+               placeholder="Enter your Admission Number">
+
+        <br>
+        <button type="submit" class="btn btn-danger btn-block">
+            Track Status
+        </button>
+    </form>
+
+    <!-- STATIC STATUS DISPLAY (Frontend Only) -->
+    <hr>
+    <h4 style="color: rgb(127,1,1); font-weight:bold;">Complaint Status</h4>
+
+    <table class="table table-bordered mt-3">
+        <tr>
+            <th>Complaint ID</th>
+            <td>ABES12345</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td><span class="badge badge-warning">Under Review</span></td>
+        </tr>
+        <tr>
+            <th>Department</th>
+            <td>Administration</td>
+        </tr>
+        <tr>
+            <th>Last Updated</th>
+            <td>12 Dec 2025</td>
+        </tr>
+    </table>
+
+    <p style="font-size:14px; color:gray;">
+        * Status shown above is for demonstration purposes only.
+    </p>
+</main>
+
+<!-- JS -->
+<script src="script.js"></script>
+</body>
+</html>

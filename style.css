@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    background: linear-gradient(to top left, #ffffff 0%, #3b4448 100%);
+}
+
+/* HEADER */
+.top-header {
+    background: #7d7d7d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+}
+
+.top-header img {
+    height: 65px;
+}
+
+.top-header h3 {
+    color: rgb(87, 2, 2);
+    font-weight: bold;
+}
+
+.menu-icon {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+/* SIDE MENU */
+.side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #2c2c2c;
+    transition: 0.4s;
+    padding-top: 60px;
+    z-index: 999;
+}
+
+.side-menu a {
+    color: white;
+    display: block;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.side-menu a:hover {
+    background: #7d0000;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    height: 60vh;
+    background: url("https://www.abes.ac.in/assets/2.jpg") center/cover;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FORM */
+.mainform {
+    background: white;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 0 #ddd;
+}
+
+label {
+    font-weight: bold;
+    color: rgb(127, 1, 1);
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
