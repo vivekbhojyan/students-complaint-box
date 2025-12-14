@@ -1,8 +1,11 @@
+/* ================= MENU ================= */
 function toggleMenu() {
     const menu = document.getElementById("sideMenu");
-    menu.style.width = menu.style.width === "300px" ? "0" : "300px";
+    if (!menu) return;
+    menu.style.width = (menu.style.width === "300px") ? "0" : "300px";
 }
 
+/* ================= STUDENT COMPLAINT ================= */
 function validateForm() {
     let valid = true;
 
@@ -11,105 +14,99 @@ function validateForm() {
 
     document.querySelectorAll(".error").forEach(e => e.innerText = "");
 
-    function err(id, msg) {
+    const err = (id, msg) => {
         document.getElementById(id).innerText = msg;
         valid = false;
-    }
+    };
 
-    if (!fname.value.trim() || !alpha.test(fname.value))
-        err("fnameErr", "Only alphabets allowed");
+    if (!fname.value.trim() || !alpha.test(fname.value)) err("fnameErr", "Only alphabets allowed");
+    if (!lname.value.trim() || !alpha.test(lname.value)) err("lnameErr", "Only alphabets allowed");
+    if (!phoneRegex.test(phone.value)) err("phoneErr", "Enter valid 10-digit number");
+    if (!roll.value.trim()) err("rollErr", "Roll number required");
+    if (!admission.value.trim()) err("admissionErr", "Admission number required");
+    if (!branch.value) err("branchErr", "Select your branch");
+    if (!document.querySelector('input[name="cat"]:checked')) err("catErr", "Select category");
+    if (!complaint.value.trim()) err("complaintErr", "Complaint cannot be empty");
 
-    if (!lname.value.trim() || !alpha.test(lname.value))
-        err("lnameErr", "Only alphabets allowed");
-
-    if (!phoneRegex.test(phone.value))
-        err("phoneErr", "Enter valid 10-digit number");
-
-    if (!roll.value.trim())
-        err("rollErr", "Roll number required");
-
-    if (!admission.value.trim())
-        err("admissionErr", "Admission number required");
-
-    if (!branch.value)
-        err("branchErr", "Select your branch");
-
-    if (!document.querySelector('input[name="cat"]:checked'))
-        err("catErr", "Select at least one category");
-
-    if (!complaint.value.trim())
-        err("complaintErr", "Complaint cannot be empty");
-
-    // ✅ Redirect if everything is valid
     if (valid) {
+        const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+        complaints.push({
+            fname: fname.value,
+            lname: lname.value,
+            phone: phone.value,
+            roll: roll.value,
+            admission: admission.value,
+            branch: branch.value,
+            complaint: complaint.value,
+            date: new Date().toLocaleString()
+        });
+
+        localStorage.setItem("complaints", JSON.stringify(complaints));
         window.location.href = "success.html";
     }
 
-    return false; // prevent default form submit
+    return false;
 }
 
+/* ================= CONTACT FORM ================= */
 function validateContactForm() {
     let valid = true;
+    document.querySelectorAll(".error").forEach(e => e.innerText = "");
 
-    const nameRegex = /^[A-Za-z ]+$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    // Clear previous errors
-    document.getElementById("cnameErr").innerText = "";
-    document.getElementById("cemailErr").innerText = "";
-    document.getElementById("cmessageErr").innerText = "";
-
-    const name = document.getElementById("cname").value.trim();
-    const email = document.getElementById("cemail").value.trim();
-    const message = document.getElementById("cmessage").value.trim();
-
-    if (name === "" || !nameRegex.test(name)) {
-        document.getElementById("cnameErr").innerText =
-            "Name must contain only alphabets and cannot be empty";
-        valid = false;
-    }
-
-    if (email === "" || !emailRegex.test(email)) {
-        document.getElementById("cemailErr").innerText =
-            "Enter a valid email address";
-        valid = false;
-    }
-
-    if (message === "") {
-        document.getElementById("cmessageErr").innerText =
-            "Message cannot be empty";
-        valid = false;
-    }
+    if (!cname.value.trim()) valid = false, cnameErr.innerText = "Name required";
+    if (!cemail.value.trim()) valid = false, cemailErr.innerText = "Email required";
+    if (!cmessage.value.trim()) valid = false, cmessageErr.innerText = "Message required";
 
     return valid;
 }
 
+/* ================= LOGIN ================= */
 function validateLoginForm() {
-    let valid = true;
+    const id = loginAdmission.value.trim();
+    const pass = loginPassword.value.trim();
 
-    // clear previous errors
-    document.getElementById("loginAdmissionErr").innerText = "";
-    document.getElementById("loginPasswordErr").innerText = "";
+    loginAdmissionErr.innerText = "";
+    loginPasswordErr.innerText = "";
 
-    const admission = document.getElementById("loginAdmission").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
+    if (!id) loginAdmissionErr.innerText = "ID required";
+    if (!pass) loginPasswordErr.innerText = "Password required";
 
-    if (admission === "") {
-        document.getElementById("loginAdmissionErr").innerText =
-            "Admission number is required";
-        valid = false;
-    }
+    if (!id || !pass) return false;
 
-    if (password === "") {
-        document.getElementById("loginPasswordErr").innerText =
-            "Password is required";
-        valid = false;
-    }
-
-    // ✅ if validation passes, redirect
-    if (valid) {
+    // ADMIN LOGIN
+    if (id === "1" && pass === "2") {
+        window.location.href = "adm.html";
+    } else {
         window.location.href = "index1.html";
     }
 
-    return false; // always prevent default form submit
+    return false;
+}
+
+/* ================= ADMIN LOAD ================= */
+function loadComplaints() {
+    const table = document.getElementById("complaintTable");
+    if (!table) return;
+
+    const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+    if (complaints.length === 0) {
+        table.innerHTML = "<tr><td colspan='7'>No complaints submitted</td></tr>";
+        return;
+    }
+
+    complaints.forEach((c, i) => {
+        table.innerHTML += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${c.fname} ${c.lname}</td>
+                <td>${c.branch}</td>
+                <td>${c.roll}</td>
+                <td>${c.admission}</td>
+                <td>${c.complaint}</td>
+                <td>${c.date}</td>
+            </tr>
+        `;
+    });
 }

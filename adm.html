@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | ABES</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body onload="loadComplaints()">
+
+<header class="top-header">
+    <h1><b>ADMIN PANEL – ABES</b></h1>
+    <a href="index.html" class="btn btn-danger">Logout</a>
+</header>
+
+<main class="mainform" style="max-width:1000px;">
+    <h2>Student Complaints</h2>
+    <hr>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Branch</th>
+                <th>Roll</th>
+                <th>Admission</th>
+                <th>Complaint</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="complaintTable"></tbody>
+    </table>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
