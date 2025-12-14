@@ -89,8 +89,22 @@ function validateLoginForm() {
     // ADMIN LOGIN
     if (id === "1" && pass === "2") {
         window.location.href = "adm.html";
-    } else {
+
+    } 
+    if(id==="2400320101284"&&pass==="vivek"){
         window.location.href = "index1.html";
+    }
+    if(id==="2400320101304"&&pass==="yashi"){
+        window.location.href = "index1.html";
+    }
+    if(id==="2400320101284"&&pass==="vishal"){
+        window.location.href = "index1.html";
+    }
+    if(id==="2400320101285"&&pass==="vivek"){
+        window.location.href = "index1.html";
+    }else {
+        loginAdmissionErr.innerText = "Wrong Id or password ";
+        loginPasswordErr.innerText = "Wrong Id or password";
     }
 
     return false;
