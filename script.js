@@ -40,8 +40,14 @@ function validateForm() {
     if (!complaint.value.trim())
         err("complaintErr", "Complaint cannot be empty");
 
-    return valid;
+    // ✅ Redirect if everything is valid
+    if (valid) {
+        window.location.href = "success.html";
+    }
+
+    return false; // prevent default form submit
 }
+
 function validateContactForm() {
     let valid = true;
 

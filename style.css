@@ -13,12 +13,13 @@ body {
 }
 
 .top-header img {
-    height: 65px;
+    height: 85px;
 }
 
-.top-header h3 {
+.top-header h1 {
     color: rgb(87, 2, 2);
-    font-weight: bold;
+    align-items: center;
+    justify-content:space-between;
 }
 
 .menu-icon {
@@ -89,11 +90,13 @@ body {
 /* FORM */
 .mainform {
     background: white;
-    max-width: 900px;
+    max-width: 500px;
     margin: 50px auto;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 10px 10px 0 #ddd;
+    color: #7d0000;
+   
 }
 
 label {

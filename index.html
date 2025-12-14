@@ -2,101 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ABES Complaint Form</title>
+    <title>Login | ABES Engineering College</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!-- Custom CSS -->
+    <!-- Existing CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-<!-- SIDE MENU -->
-<div id="sideMenu" class="side-menu">
-    <span class="close-btn" onclick="toggleMenu()" style="color: #7d7d7d7d;">&#9776;</span>
     
-    <a href="complaint.html">Track-Complaints</a>
-    
-    <a href="contact.html">Contact</a>
-    <a href="login.html">Log-out</a>
-    <a href="about.html">About-us</a>
-</div>
 
 <!-- HEADER -->
 <header class="top-header">
     <img src="download-removebg-preview.png" alt="ABES Logo">
-    <h1 style="color: rgb(99, 4, 4);"><b>ABES ENGINEERING COLLEGE</b></h1>
-    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <h1 style="color: rgb(99, 4, 4); "><b>ABES ENGINEERING COLLEGE</b></h1>
 </header>
 
 <!-- HERO -->
 <section class="hero">
     <div class="hero-content">
-        <h1><b>Welcome to ABES Complaint Box</b></h1>
-        <p>A platform where students can safely submit complaints and help us improve campus life together.</p>
+        <h1>Student Login</h1>
+        <p>Login to access the complaint portal</p>
     </div>
 </section>
 
-<!-- FORM -->
+<!-- LOGIN FORM -->
 <main class="mainform">
-    <h2 style="color: rgb(112, 12, 12);">Complaint Form</h2>
-    <p>Please provide details about your complaint. The administration will review and take necessary action.</p>
+    <h2 style="color: rgb(127,1,1); font-weight:bold;">Login</h2>
     <hr>
 
-    <form onsubmit="return validateForm()">
-
-        <label>First Name</label>
-        <input type="text" id="fname" class="form-control">
-        <div class="error" id="fnameErr"></div>
-
-        <label>Last Name</label>
-        <input type="text" id="lname" class="form-control">
-        <div class="error" id="lnameErr"></div>
-
-        <label>Phone Number</label>
-        <input type="text" id="phone" class="form-control">
-        <div class="error" id="phoneErr"></div>
-
-        <label>University Roll No</label>
-        <input type="text" id="roll" class="form-control">
-        <div class="error" id="rollErr"></div>
+    <form onsubmit="return validateLoginForm()">
 
         <label>Admission Number</label>
-        <input type="text" id="admission" class="form-control">
-        <div class="error" id="admissionErr"></div>
+        <input type="text" id="loginAdmission" class="form-control"
+               placeholder="Enter Admission Number">
+        <div class="error" id="loginAdmissionErr"></div>
 
-        <label>Branch</label>
-        <select id="branch" class="form-control">
-            <option value="">-- Select --</option>
-            <option>CSE</option>
-            <option>CSE-DS</option>
-            <option>CSE-AIML</option>
-            <option>ECE</option>
-            <option>Mechanical</option>
-        </select>
-        <div class="error" id="branchErr"></div>
+        <label>Password</label>
+        <input type="password" id="loginPassword" class="form-control"
+               placeholder="Enter Password (DOB)">
+        <div class="error" id="loginPasswordErr"></div>
 
         <br>
-
-        <label>Complaint Category</label><br>
-        <input type="checkbox" name="cat"> Infrastructure
-        <input type="checkbox" name="cat"> Internet
-        <input type="checkbox" name="cat"> Exam
-        <div class="error" id="catErr"></div>
-
-        <br><br>
-
-        <label>Complaint Details</label>
-        <textarea id="complaint" class="form-control"></textarea>
-        <div class="error" id="complaintErr"></div>
-
-        <br>
-        <button class="btn btn-danger btn-block">Submit</button>
+        <button type="submit" class="btn btn-danger btn-block" >
+            Login
+        </button>
     </form>
+
+    <p style="text-align:center; margin-top:15px;">
+        Having any issue? <a href="contact.html">Contact us</a>
+    </p>
 </main>
 
 <!-- JS -->
