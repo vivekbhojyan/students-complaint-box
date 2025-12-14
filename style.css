@@ -109,3 +109,17 @@ label {
     font-size: 14px;
 }
 
+.a{
+    color: rgb(99, 4, 4); 
+    display: flex; 
+    justify-content: space-around;
+    height: 150px;
+}
+.b{
+    margin:50px;
+}
+.a img{
+    height:100px;
+    margin:30px;
+    margin-left: 5px;
+}
