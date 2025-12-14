@@ -1,4 +1,5 @@
 /* ================= MENU ================= */
+
 function toggleMenu() {
     const menu = document.getElementById("sideMenu");
     if (!menu) return;
@@ -29,22 +30,33 @@ function validateForm() {
     if (!complaint.value.trim()) err("complaintErr", "Complaint cannot be empty");
 
     if (valid) {
-        const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
 
-        complaints.push({
-            fname: fname.value,
-            lname: lname.value,
-            phone: phone.value,
-            roll: roll.value,
-            admission: admission.value,
-            branch: branch.value,
-            complaint: complaint.value,
-            date: new Date().toLocaleString()
-        });
+    complaints.push({
+        fname: fname.value,
+        lname: lname.value,
+        phone: phone.value,
+        roll: roll.value,
+        admission: admission.value,
+        branch: branch.value,
+        complaint: complaint.value,
+        date: new Date().toLocaleString()
+    });
 
-        localStorage.setItem("complaints", JSON.stringify(complaints));
+    localStorage.setItem("complaints", JSON.stringify(complaints));
+
+    // 🎉 CONFETTI BLAST
+    confetti({
+        particleCount: 100,
+        spread: 90,
+        origin: { y: 0.5 }
+    });
+
+    // ⏳ wait then redirect
+    setTimeout(() => {
         window.location.href = "success.html";
-    }
+    }, 20);
+}
 
     return false;
 }
