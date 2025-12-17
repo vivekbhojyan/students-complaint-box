@@ -60,6 +60,13 @@ body {
     font-size: 36px;
     color: white;
     cursor: pointer;
+    background: white;
+    height: 25;
+    margin-top: 7px;
+    width: 33px;
+    border: black;
+    
+    border-radius: 15%;
 }
 
 /* HERO */

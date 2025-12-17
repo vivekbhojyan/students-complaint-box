@@ -94,17 +94,32 @@ function validateLoginForm() {
     if(id==="2400320101284"&&pass==="vivek"){
         window.location.href = "index1.html";
     }
-    if(id==="2400320101304"&&pass==="yashi"){
+    else if(id==="2400320101304"&&pass==="yashi"){
         window.location.href = "index1.html";
     }
-    if(id==="2400320101284"&&pass==="vishal"){
+    else if(id==="2400320101273"&&pass==="vishal"){
         window.location.href = "index1.html";
     }
-    if(id==="2400320101285"&&pass==="vivek"){
+    else if(id==="2400320101285"&&pass==="vivek"){
         window.location.href = "index1.html";
-    }else {
-        loginAdmissionErr.innerText = "Wrong Id or password ";
-        loginPasswordErr.innerText = "Wrong Id or password";
+    }
+    else if(id==="2400320101285"&&pass==="vivek"){
+        window.location.href = "index1.html";
+    }
+    else if(id==="2400320101284"&&pass!="vivek") {
+        loginPasswordErr.innerText = "Wrong Password ";
+    }else if(id==="2400320101273"&&pass!="vishal") {
+        loginPasswordErr.innerText = "Wrong Password ";
+    }else if(id==="2400320101304"&&pass!="yashi") {
+        loginPasswordErr.innerText = "Wrong Password";
+    }else if(id==="2400320101285"&&pass!="vivek") {
+        loginPasswordErr.innerText = "Wrong Password";
+    }else if(id==="1"&&pass!="2") {
+        loginPasswordErr.innerText = "Wrong Password";
+    }else if(id!=="240032101304"||id!=="2400320101284"||id!=="1"||id!=="2400320101273"||id!=="2400320101285"){
+        loginAdmissionErr.innerText = " ID not found! ";
+    }else{
+        loginPasswordErr.innerText = "Wrong Password";
     }
 
     return false;
