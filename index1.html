@@ -72,12 +72,12 @@
         <br>
 
         <label>Complaint Category</label><br>
-        <input type="checkbox" name="cat"> Infrastructure<br>
-        <input type="checkbox" name="cat"> Internet<br>
-        <input type="checkbox" name="cat"> Exam<br>
-        <input type="checkbox" name="cat"> Quiz<br>
-        <input type="checkbox" name="cat"> Hostel<br>
-        <input type="checkbox" name="cat"> ERP<br>
+        <input type="checkbox" id="cat1" value="Infrastructure"> Infrastructure<br>
+        <input type="checkbox" id="cat2" value="Internet"> Internet<br>
+        <input type="checkbox" id="cat3" value="Exam"> Exam<br>
+        <input type="checkbox" id="cat4" value="Quiz"> Quiz<br>
+        <input type="checkbox" id="cat5" value="Hostel"> Hostel<br>
+        <input type="checkbox" id="cat6" value="ERP"> ERP<br>
         <div class="error" id="catErr"></div>
 
         <br><br>
@@ -123,14 +123,24 @@
         const branch    = document.getElementById("branch").value;
         const complaint = document.getElementById("complaint").value.trim();
 
+        // collect categories using individual IDs
+        const cats = [];
+        if (document.getElementById("cat1").checked) cats.push("Infrastructure");
+        if (document.getElementById("cat2").checked) cats.push("Internet");
+        if (document.getElementById("cat3").checked) cats.push("Exam");
+        if (document.getElementById("cat4").checked) cats.push("Quiz");
+        if (document.getElementById("cat5").checked) cats.push("Hostel");
+        if (document.getElementById("cat6").checked) cats.push("ERP");
+
+        const category = cats.join(", ");
+
         if (!fname || !alpha.test(fname))   err("fnameErr",     "Only alphabets allowed");
         if (!lname || !alpha.test(lname))   err("lnameErr",     "Only alphabets allowed");
         if (!phoneRegex.test(phone))        err("phoneErr",     "Enter valid 10-digit number");
         if (!roll)                          err("rollErr",      "Roll number required");
         if (!admission)                     err("admissionErr", "Admission number required");
         if (!branch)                        err("branchErr",    "Select your branch");
-        if (!document.querySelector('input[name="cat"]:checked'))
-                                            err("catErr",       "Select at least one category");
+        if (cats.length === 0)              err("catErr",       "Select at least one category");
         if (!complaint)                     err("complaintErr", "Complaint cannot be empty");
 
         if (!valid) return;
@@ -138,10 +148,16 @@
         const { error } = await _supabase
             .from("complaints")
             .insert([{
-                fname, lname, phone, roll, admission, branch,
-                complaint,
-                date: new Date().toLocaleString(),
-                progress: "Under Review"
+                fname:      fname,
+                lname:      lname,
+                phone:      phone,
+                roll:       roll,
+                admission:  admission,
+                branch:     branch,
+                category:   category,
+                complaint:  complaint,
+                date:       new Date().toLocaleString(),
+                progress:   "Under Review"
             }]);
 
         if (error) {

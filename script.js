@@ -110,9 +110,11 @@ async function loadComplaints() {
 <td>${c.branch}</td>
 <td>${c.roll}</td>
 <td>${c.admission}</td>
+<td>${c.category || "-"}</td>
 <td>${c.complaint}</td>
 <td>${c.date}</td>
 <td>${c.progress}</td>
+
 </tr>`;
     });
 }

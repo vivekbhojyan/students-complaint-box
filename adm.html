@@ -14,7 +14,7 @@
     <a href="index.html" class="btn btn-danger">Logout</a>
 </header>
 
-<main class="mainform" style="max-width:1000px;">
+<main class="mainform" style="max-width:1100px;">
     <h2>Student Complaints</h2>
     <hr>
     <p id="loadingMsg" style="color:gray;">Loading complaints...</p>
@@ -26,6 +26,7 @@
                 <th>Branch</th>
                 <th>Roll</th>
                 <th>Admission</th>
+                <th>Category</th>
                 <th>Complaint</th>
                 <th>Date</th>
                 <th>Progress</th>
@@ -58,7 +59,7 @@
         msg.style.display = "none";
 
         if (!data || data.length === 0) {
-            table.innerHTML = "<tr><td colspan='8' style='text-align:center;'>No complaints found</td></tr>";
+            table.innerHTML = "<tr><td colspan='9' style='text-align:center;'>No complaints found</td></tr>";
             return;
         }
 
@@ -70,6 +71,7 @@
                 <td>${c.branch}</td>
                 <td>${c.roll}</td>
                 <td>${c.admission}</td>
+                <td>${c.category || "-"}</td>
                 <td>${c.complaint}</td>
                 <td>${c.date}</td>
                 <td>${c.progress}</td>
