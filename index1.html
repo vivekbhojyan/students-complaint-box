@@ -4,36 +4,26 @@
     <meta charset="UTF-8">
     <title>ABES Complaint Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- SIDE MENU -->
 <div id="sideMenu" class="side-menu">
     <span class="close-btn" onclick="toggleMenu()" style="color: #000000;">&#9776;</span>
-    
     <a href="complaint.html">Track-Complaints</a>
-    
     <a href="contact.html">Contact</a>
     <a href="index.html">Log-out</a>
     <a href="about.html">About-us</a>
 </div>
 
-<!-- HEADER -->
 <header class="top-header">
     <img src="download-removebg-preview.png" alt="ABES Logo">
     <h1 style="color: rgb(99, 4, 4);"><b>ABES ENGINEERING COLLEGE</b></h1>
     <div class="menu-icon" onclick="toggleMenu()"></div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
     <div class="hero-content">
         <h1><b>Welcome to ABES Complaint Box</b></h1>
@@ -41,13 +31,12 @@
     </div>
 </section>
 
-<!-- FORM -->
 <main class="mainform">
     <h2 style="color: rgb(112, 12, 12);">Complaint Form</h2>
     <p>Please provide details about your complaint. The administration will review and take necessary action.</p>
     <hr>
 
-    <form onsubmit="return validateForm()">
+    <form id="complaintForm">
 
         <label>First Name</label>
         <input type="text" id="fname" class="form-control">
@@ -98,16 +87,77 @@
         <div class="error" id="complaintErr"></div>
 
         <br>
-        <button class="btn btn-danger btn-block" >Submit</button>
+
+        <button type="submit" class="btn btn-danger btn-block">Submit</button>
+
     </form>
 </main>
 
-<!-- JS -->
-<script src="script.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+    const SUPABASE_URL = "https://yafdggrcntaivmjpenuf.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlhZmRnZ3JjbnRhaXZtanBlbnVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MDYyMzAsImV4cCI6MjA4OTA4MjIzMH0.9TU4Lypw0peG_lOOte9clEDX9IcuAP241iQ0gOzVlFk";
+    const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    document.getElementById("complaintForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        let valid = true;
+        const alpha = /^[A-Za-z ]+$/;
+        const phoneRegex = /^[0-9]{10}$/;
+
+        document.querySelectorAll(".error").forEach(el => el.innerText = "");
+
+        const err = (id, msg) => {
+            document.getElementById(id).innerText = msg;
+            valid = false;
+        };
+
+        const fname     = document.getElementById("fname").value.trim();
+        const lname     = document.getElementById("lname").value.trim();
+        const phone     = document.getElementById("phone").value.trim();
+        const roll      = document.getElementById("roll").value.trim();
+        const admission = document.getElementById("admission").value.trim();
+        const branch    = document.getElementById("branch").value;
+        const complaint = document.getElementById("complaint").value.trim();
+
+        if (!fname || !alpha.test(fname))   err("fnameErr",     "Only alphabets allowed");
+        if (!lname || !alpha.test(lname))   err("lnameErr",     "Only alphabets allowed");
+        if (!phoneRegex.test(phone))        err("phoneErr",     "Enter valid 10-digit number");
+        if (!roll)                          err("rollErr",      "Roll number required");
+        if (!admission)                     err("admissionErr", "Admission number required");
+        if (!branch)                        err("branchErr",    "Select your branch");
+        if (!document.querySelector('input[name="cat"]:checked'))
+                                            err("catErr",       "Select at least one category");
+        if (!complaint)                     err("complaintErr", "Complaint cannot be empty");
+
+        if (!valid) return;
+
+        const { error } = await _supabase
+            .from("complaints")
+            .insert([{
+                fname, lname, phone, roll, admission, branch,
+                complaint,
+                date: new Date().toLocaleString(),
+                progress: "Under Review"
+            }]);
+
+        if (error) {
+            alert("Error: " + error.message);
+            return;
+        }
+
+        confetti({ particleCount: 100, spread: 90, origin: { y: 0.5 } });
+
+        setTimeout(function() {
+            window.location.href = "success.html";
+        }, 1000);
+    });
+</script>
+
+<script src="script.js"></script>
 
 </body>
 </html>

@@ -2,20 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About Us | ABES Engineering College</title>
+    <title>Success | ABES Engineering College</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- Existing CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- SIDE MENU -->
 <div id="sideMenu" class="side-menu">
     <span class="close-btn" onclick="toggleMenu()" style="color: #000000;">&#9776;</span>
     <a href="index1.html">Home</a>
@@ -23,49 +17,38 @@
     <a href="contact.html">Contact</a>
     <a href="about.html">About Us</a>
     <a href="index.html">Logout</a>
-    
 </div>
 
-<!-- HEADER -->
 <header class="top-header">
     <img src="download-removebg-preview.png" alt="ABES Logo">
     <h1 style="color: rgb(99, 4, 4);"><b>ABES ENGINEERING COLLEGE</b></h1>
     <div class="menu-icon" onclick="toggleMenu()"></div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
     <div class="hero-content">
-        <h1>ABES Engineering college</h1>
+        <h1>ABES Engineering College</h1>
         <p>Always available for you!</p>
     </div>
 </section>
 
-<!-- ABOUT CONTENT -->
 <main class="mainform">
-    <h2 >&nbsp&nbsp&nbsp&nbsp&nbspSubmitted successfully</h2>
+    <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submitted Successfully</h2>
     <hr>
-    <div class="a">
-    <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyMzhmdzdycWhnMXg1NTZ4OW9yNzlzdHhnbXBmZ3Q1eG9wb2Q3dmMwYSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/THCXntdr7z2ZIZZFda/200.gif" alt="successfully submitted">
+    <div style="text-align:center;">
+        <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyMzhmdzdycWhnMXg1NTZ4OW9yNzlzdHhnbXBmZ3Q1eG9wb2Q3dmMwYSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/THCXntdr7z2ZIZZFda/200.gif" alt="successfully submitted">
     </div>
     <hr>
-    <p> Having any issue ? <a href= " contact.html">Contat us</a></p>
+    <p>Having any issue? <a href="contact.html">Contact us</a></p>
     <hr>
 </main>
 
-<!-- JS -->
-<script src="script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script>
-    
-confetti({
-    particleCount: 700,
-    spread: 100,
-    origin: { y: 0.5 }
-});
-</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="script.js"></script>
+<script>
+    confetti({ particleCount: 700, spread: 100, origin: { y: 0.5 } });
+</script>
 
 </body>
 </html>

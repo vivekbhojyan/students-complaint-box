@@ -4,44 +4,33 @@
     <meta charset="UTF-8">
     <title>Contact Us | ABES Engineering College</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- Existing CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- SIDE MENU -->
 <div id="sideMenu" class="side-menu">
     <span class="close-btn" onclick="toggleMenu()" style="color: #000000;">&#9776;</span>
     <a href="index.html">Log-in/ log-out</a>
-    
 </div>
 
-<!-- HEADER -->
 <header class="top-header">
     <img src="download-removebg-preview.png" alt="ABES Logo">
     <h1 style="color: rgb(99, 4, 4);"><b>ABES ENGINEERING COLLEGE</b></h1>
     <div class="menu-icon" onclick="toggleMenu()"></div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
     <div class="hero-content">
         <h1>Contact Us</h1>
-        <p>We’re here to help you !</p>
+        <p>We're here to help you !</p>
     </div>
 </section>
 
-<!-- CONTACT CONTENT -->
 <main class="mainform">
     <div class="row">
 
-        <!-- CONTACT INFO -->
         <div class="col-md-5">
             <h3 style="color: rgb(127,1,1); font-weight:bold;">Get in Touch</h3>
             <p><b>Address:</b> ABES Engineering College, Ghaziabad, UP</p>
@@ -50,38 +39,34 @@
             <p><b>Office Hours:</b> Mon–Fri, 9:00 AM – 5:00 PM</p>
         </div>
 
-        <!-- CONTACT FORM -->
         <div class="col-md-7">
             <h3 style="color: rgb(127,1,1); font-weight:bold;">Send a Message</h3>
 
             <form onsubmit="return validateContactForm()">
 
-    <label>Name</label>
-    <input type="text" id="cname" class="form-control" placeholder="Enter your name">
-    <div class="error" id="cnameErr"></div>
+                <label>Name</label>
+                <input type="text" id="cname" class="form-control" placeholder="Enter your name">
+                <div class="error" id="cnameErr"></div>
 
-    <label>Email</label>
-    <input type="text" id="cemail" class="form-control" placeholder="Enter your email">
-    <div class="error" id="cemailErr"></div>
+                <label>Email</label>
+                <input type="text" id="cemail" class="form-control" placeholder="Enter your email">
+                <div class="error" id="cemailErr"></div>
 
-    <label>Message</label>
-    <textarea id="cmessage" rows="5" class="form-control"
-              placeholder="Write your message here..."></textarea>
-    <div class="error" id="cmessageErr"></div>
+                <label>Message</label>
+                <textarea id="cmessage" rows="5" class="form-control"
+                          placeholder="Write your message here..."></textarea>
+                <div class="error" id="cmessageErr"></div>
 
-    <br>
-    <button type="submit" class="btn btn-danger btn-block">
-        Send Message
-    </button>
-</form>
-
+                <br>
+                <button type="submit" class="btn btn-danger btn-block">Send Message</button>
+            </form>
         </div>
 
     </div>
 </main>
 
-<!-- JS -->
-<script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
 </body>
 </html>

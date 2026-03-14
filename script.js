@@ -1,8 +1,5 @@
 /* ================= MENU ================= */
-const SUPABASE_URL = "https://yafdggrcntaivmjpenuf.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlhZmRnZ3JjbnRhaXZtanBlbnVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MDYyMzAsImV4cCI6MjA4OTA4MjIzMH0.9TU4Lypw0peG_lOOte9clEDX9IcuAP241iQ0gOzVlFk";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 function toggleMenu() {
     const menu = document.getElementById("sideMenu");
@@ -10,145 +7,105 @@ function toggleMenu() {
     menu.style.width = (menu.style.width === "300px") ? "0" : "300px";
 }
 
-/* ================= STUDENT COMPLAINT ================= */
-async function validateForm() {
-    let valid = true;
-
-    const alpha = /^[A-Za-z ]+$/;
-    const phoneRegex = /^[0-9]{10}$/;
-
-    document.querySelectorAll(".error").forEach(e => e.innerText = "");
-
-    const err = (id, msg) => {
-        document.getElementById(id).innerText = msg;
-        valid = false;
-    };
-
-    if (!fname.value.trim() || !alpha.test(fname.value)) err("fnameErr", "Only alphabets allowed");
-    if (!lname.value.trim() || !alpha.test(lname.value)) err("lnameErr", "Only alphabets allowed");
-    if (!phoneRegex.test(phone.value)) err("phoneErr", "Enter valid 10-digit number");
-    if (!roll.value.trim()) err("rollErr", "Roll number required");
-    if (!admission.value.trim()) err("admissionErr", "Admission number required");
-    if (!branch.value) err("branchErr", "Select your branch");
-    if (!document.querySelector('input[name="cat"]:checked')) err("catErr", "Select category");
-    if (!complaint.value.trim()) err("complaintErr", "Complaint cannot be empty");
-
-    if (valid) {
-    await supabase
-    .from("complaints")
-    .insert([
-{
-fname: fname.value,
-lname: lname.value,
-phone: phone.value,
-roll: roll.value,
-admission: admission.value,
-branch: branch.value,
-complaint: complaint.value,
-date: new Date().toLocaleString(),
-progress: "Under Review"
-}
-]);
-
-    // 🎉 CONFETTI BLAST
-    confetti({
-        particleCount: 100,
-        spread: 90,
-        origin: { y: 0.5 }
-    });
-
-    // ⏳ wait then redirect
-    setTimeout(() => {
-        window.location.href = "success.html";
-    }, 20);
-}
-
-    return false;
-}
-
 /* ================= CONTACT FORM ================= */
+
 function validateContactForm() {
+
     let valid = true;
+
     document.querySelectorAll(".error").forEach(e => e.innerText = "");
 
-    if (!cname.value.trim()) valid = false, cnameErr.innerText = "Name required";
-    if (!cemail.value.trim()) valid = false, cemailErr.innerText = "Email required";
-    if (!cmessage.value.trim()) valid = false, cmessageErr.innerText = "Message required";
+    if (!cname.value.trim()) {
+        cnameErr.innerText = "Name required";
+        valid = false;
+    }
+
+    if (!cemail.value.trim()) {
+        cemailErr.innerText = "Email required";
+        valid = false;
+    }
+
+    if (!cmessage.value.trim()) {
+        cmessageErr.innerText = "Message required";
+        valid = false;
+    }
 
     return valid;
 }
 
 /* ================= LOGIN ================= */
+
 function validateLoginForm() {
-    const id = loginAdmission.value.trim();
+
+    const id   = loginAdmission.value.trim();
     const pass = loginPassword.value.trim();
 
     loginAdmissionErr.innerText = "";
-    loginPasswordErr.innerText = "";
+    loginPasswordErr.innerText  = "";
 
-    if (!id) loginAdmissionErr.innerText = "ID required";
-    if (!pass) loginPasswordErr.innerText = "Password required";
+    if (!id)   loginAdmissionErr.innerText = "ID required";
+    if (!pass) loginPasswordErr.innerText  = "Password required";
 
     if (!id || !pass) return false;
 
-    // ADMIN LOGIN
     if (id === "1" && pass === "2") {
         window.location.href = "adm.html";
+        return false;
+    }
 
-    } 
-    if(id==="2400320101284"&&pass==="vivek"){
+    if (id === "2400320101284" && pass === "vivek")
         window.location.href = "index1.html";
-    }
-    else if(id==="2400320101304"&&pass==="yashi"){
+
+    else if (id === "2400320101304" && pass === "yashi")
         window.location.href = "index1.html";
-    }
-    else if(id==="2400320101273"&&pass==="vishal"){
+
+    else if (id === "2400320101273" && pass === "vishal")
         window.location.href = "index1.html";
-    }
-    else if(id==="2400320101285"&&pass==="vivek"){
+
+    else if (id === "2400320101285" && pass === "vivek")
         window.location.href = "index1.html";
-    }
-    else if(id==="2400320101285"&&pass==="vivek"){
-        window.location.href = "index1.html";
-    }
-    else if(id==="2400320101284"&&pass!="vivek") {
-        loginPasswordErr.innerText = "Wrong Password ";
-    }else if(id==="2400320101273"&&pass!="vishal") {
-        loginPasswordErr.innerText = "Wrong Password ";
-    }else if(id==="2400320101304"&&pass!="yashi") {
+
+    else if (
+        id === "2400320101284" ||
+        id === "2400320101304" ||
+        id === "2400320101273" ||
+        id === "2400320101285" ||
+        id === "1"
+    ) {
         loginPasswordErr.innerText = "Wrong Password";
-    }else if(id==="2400320101285"&&pass!="vivek") {
-        loginPasswordErr.innerText = "Wrong Password";
-    }else if(id==="1"&&pass!="2") {
-        loginPasswordErr.innerText = "Wrong Password";
-    }else if(id!=="240032101304"||id!=="2400320101284"||id!=="1"||id!=="2400320101273"||id!=="2400320101285"){
-        loginAdmissionErr.innerText = " ID not found! ";
-    }else{
-        loginPasswordErr.innerText = "Wrong Password";
+    }
+    else {
+        loginAdmissionErr.innerText = "ID not found!";
     }
 
     return false;
 }
 
 /* ================= ADMIN LOAD ================= */
-async function loadComplaints(){
 
-const table = document.getElementById("complaintTable");
+async function loadComplaints() {
 
-const { data, error } = await supabase
-.from("complaints")
-.select("*");
+    const table = document.getElementById("complaintTable");
+    if (!table) return;
 
-if(data.length===0){
-table.innerHTML="<tr><td colspan='8'>No complaints</td></tr>";
-return;
-}
+    const { data, error } = await supabase
+        .from("complaints")
+        .select("*");
 
-data.forEach((c,i)=>{
+    if (error) {
+        console.log(error);
+        return;
+    }
 
-table.innerHTML += `
+    if (!data || data.length === 0) {
+        table.innerHTML = "<tr><td colspan='8'>No complaints</td></tr>";
+        return;
+    }
+
+    data.forEach((c, i) => {
+        table.innerHTML += `
 <tr>
-<td>${i+1}</td>
+<td>${i + 1}</td>
 <td>${c.fname} ${c.lname}</td>
 <td>${c.branch}</td>
 <td>${c.roll}</td>
@@ -156,10 +113,6 @@ table.innerHTML += `
 <td>${c.complaint}</td>
 <td>${c.date}</td>
 <td>${c.progress}</td>
-</tr>
-`;
-
-});
-
+</tr>`;
+    });
 }
-
