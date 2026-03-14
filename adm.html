@@ -17,7 +17,7 @@
 <main class="mainform" style="max-width:1000px;">
     <h2>Student Complaints</h2>
     <hr>
-
+    <p id="loadingMsg" style="color:gray;">Loading complaints...</p>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
@@ -36,7 +36,47 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+<script>
+    const SUPABASE_URL = "https://yafdggrcntaivmjpenuf.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlhZmRnZ3JjbnRhaXZtanBlbnVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MDYyMzAsImV4cCI6MjA4OTA4MjIzMH0.9TU4Lypw0peG_lOOte9clEDX9IcuAP241iQ0gOzVlFk";
+    const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function loadComplaints() {
+        const table = document.getElementById("complaintTable");
+        const msg   = document.getElementById("loadingMsg");
+
+        const { data, error } = await _supabase
+            .from("complaints")
+            .select("*");
+
+        if (error) {
+            msg.innerText = "Error loading complaints: " + error.message;
+            msg.style.color = "red";
+            return;
+        }
+
+        msg.style.display = "none";
+
+        if (!data || data.length === 0) {
+            table.innerHTML = "<tr><td colspan='8' style='text-align:center;'>No complaints found</td></tr>";
+            return;
+        }
+
+        data.forEach((c, i) => {
+            table.innerHTML += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${c.fname} ${c.lname}</td>
+                <td>${c.branch}</td>
+                <td>${c.roll}</td>
+                <td>${c.admission}</td>
+                <td>${c.complaint}</td>
+                <td>${c.date}</td>
+                <td>${c.progress}</td>
+            </tr>`;
+        });
+    }
+</script>
 
 </body>
 </html>
