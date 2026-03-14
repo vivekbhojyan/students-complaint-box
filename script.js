@@ -1,4 +1,8 @@
 /* ================= MENU ================= */
+const SUPABASE_URL = "https://yafdggrcntaivmjpenuf.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlhZmRnZ3JjbnRhaXZtanBlbnVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1MDYyMzAsImV4cCI6MjA4OTA4MjIzMH0.9TU4Lypw0peG_lOOte9clEDX9IcuAP241iQ0gOzVlFk";
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 function toggleMenu() {
     const menu = document.getElementById("sideMenu");
@@ -7,7 +11,7 @@ function toggleMenu() {
 }
 
 /* ================= STUDENT COMPLAINT ================= */
-function validateForm() {
+async function validateForm() {
     let valid = true;
 
     const alpha = /^[A-Za-z ]+$/;
@@ -30,20 +34,21 @@ function validateForm() {
     if (!complaint.value.trim()) err("complaintErr", "Complaint cannot be empty");
 
     if (valid) {
-    const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
-
-    complaints.push({
-        fname: fname.value,
-        lname: lname.value,
-        phone: phone.value,
-        roll: roll.value,
-        admission: admission.value,
-        branch: branch.value,
-        complaint: complaint.value,
-        date: new Date().toLocaleString()
-    });
-
-    localStorage.setItem("complaints", JSON.stringify(complaints));
+    await supabase
+    .from("complaints")
+    .insert([
+{
+fname: fname.value,
+lname: lname.value,
+phone: phone.value,
+roll: roll.value,
+admission: admission.value,
+branch: branch.value,
+complaint: complaint.value,
+date: new Date().toLocaleString(),
+progress: "Under Review"
+}
+]);
 
     // 🎉 CONFETTI BLAST
     confetti({
@@ -126,28 +131,35 @@ function validateLoginForm() {
 }
 
 /* ================= ADMIN LOAD ================= */
-function loadComplaints() {
-    const table = document.getElementById("complaintTable");
-    if (!table) return;
+async function loadComplaints(){
 
-    const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+const table = document.getElementById("complaintTable");
 
-    if (complaints.length === 0) {
-        table.innerHTML = "<tr><td colspan='7'>No complaints submitted</td></tr>";
-        return;
-    }
+const { data, error } = await supabase
+.from("complaints")
+.select("*");
 
-    complaints.forEach((c, i) => {
-        table.innerHTML += `
-            <tr>
-                <td>${i + 1}</td>
-                <td>${c.fname} ${c.lname}</td>
-                <td>${c.branch}</td>
-                <td>${c.roll}</td>
-                <td>${c.admission}</td>
-                <td>${c.complaint}</td>
-                <td>${c.date}</td>
-            </tr>
-        `;
-    });
+if(data.length===0){
+table.innerHTML="<tr><td colspan='8'>No complaints</td></tr>";
+return;
 }
+
+data.forEach((c,i)=>{
+
+table.innerHTML += `
+<tr>
+<td>${i+1}</td>
+<td>${c.fname} ${c.lname}</td>
+<td>${c.branch}</td>
+<td>${c.roll}</td>
+<td>${c.admission}</td>
+<td>${c.complaint}</td>
+<td>${c.date}</td>
+<td>${c.progress}</td>
+</tr>
+`;
+
+});
+
+}
+
