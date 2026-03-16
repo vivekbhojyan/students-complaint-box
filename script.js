@@ -67,12 +67,34 @@ function validateLoginForm() {
 
     else if (
         id === "2400320101284" ||
+        id === "2400320101304"&&pass==="yashi" ||
+        id === "2400320101273"&&pass==="vishal" ||
+        id === "2400320101285"&&pass==="vivek" ||
+        id === "2400320101271"&&pass==="vishal" ||
+        id === "2400320101275"&&pass==="vishesh" ||
+        id === "2400320101279"&&pass==="vishnu" ||
+        id === "2400320101312"&&pass==="yuvraj" ||
+        id === "2400320101281"&&pass==="vishwadeep" ||
+        id === "2400320101287"&&pass==="yagyansh" ||
+        id === "1"&&pass==="2"
+    ) {
+        window.location.href = "index1.html";
+        
+    }else if (
+        id === "2400320101284" ||
         id === "2400320101304" ||
         id === "2400320101273" ||
-        id === "2400320101285" ||
+        id === "2400320101285"||
+        id === "2400320101271" ||
+        id === "2400320101275" ||
+        id === "2400320101279"||
+        id === "2400320101312"||
+        id === "2400320101281" ||
+        id === "2400320101287"||
         id === "1"
     ) {
         loginPasswordErr.innerText = "Wrong Password";
+        
     }
     else {
         loginAdmissionErr.innerText = "ID not found!";
